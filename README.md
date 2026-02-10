@@ -90,3 +90,6 @@ How to use:
 This allows you to easily validate the endpoint behavior and test different scenarios.
 <img width="757" height="517" alt="image" src="https://github.com/user-attachments/assets/18d60106-f181-495b-9219-c8a60531526f" />
 
+<img width="755" height="382" alt="image" src="https://github.com/user-attachments/assets/4109338d-a7e0-40d7-8210-83c38884bb1e" />
+
+
