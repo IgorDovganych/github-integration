@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "c9aec2ed-9639-4618-9790-3324ed65225e",
+		"name": "Github Integration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14200195"
+	},
+	"item": [
+		{
+			"name": "Get User Details - Success",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/integration/user-details?username=igordovganych",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"integration",
+						"user-details"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "igordovganych"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Details - Bad Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/integration/user-details?username=igordovganychfff",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"integration",
+						"user-details"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "igordovganychfff"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

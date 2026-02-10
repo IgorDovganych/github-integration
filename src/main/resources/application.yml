@@ -1,0 +1,12 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: false
+ 
+swagger:
+  title: "${SWAGGER_TITLE:@project.name@}"
+  description: "${SWAGGER_DESCRIPTION:@project.description@}"
+  version: "${SWAGGER_VERSION:@project.version@}"
