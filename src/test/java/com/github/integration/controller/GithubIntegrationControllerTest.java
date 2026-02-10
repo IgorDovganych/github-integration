@@ -33,14 +33,14 @@ class GithubIntegrationControllerTest {
         String username = "octocat";
 
         Repository repo = Repository.builder()
-                .name("repo1")
-                .url("https://github.com/octocat/repo1")
+                .name("boysenberry-repo-1")
+                .url("https://api.github.com/repos/octocat/boysenberry-repo-1")
                 .build();
 
         UserDetails userDetails = UserDetails.builder()
                 .userName(username)
                 .displayName("The Octocat")
-                .avatar("avatar-url")
+                .avatar("https://avatars.githubusercontent.com/u/583231?v=4")
                 .geoLocation("San Francisco")
                 .email("octo@example.com")
                 .url("https://github.com/octocat")
@@ -58,13 +58,13 @@ class GithubIntegrationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.user_name").value(username))
                 .andExpect(jsonPath("$.display_name").value("The Octocat"))
-                .andExpect(jsonPath("$.avatar").value("avatar-url"))
+                .andExpect(jsonPath("$.avatar").value("https://avatars.githubusercontent.com/u/583231?v=4"))
                 .andExpect(jsonPath("$.geo_location").value("San Francisco"))
                 .andExpect(jsonPath("$.email").value("octo@example.com"))
                 .andExpect(jsonPath("$.url").value("https://github.com/octocat"))
                 .andExpect(jsonPath("$.created_at").value("Tue, 25 Jan 2011 18:44:36 GMT"))
-                .andExpect(jsonPath("$.repos[0].name").value("repo1"))
-                .andExpect(jsonPath("$.repos[0].url").value("https://github.com/octocat/repo1"));
+                .andExpect(jsonPath("$.repos[0].name").value("boysenberry-repo-1"))
+                .andExpect(jsonPath("$.repos[0].url").value("https://api.github.com/repos/octocat/boysenberry-repo-1"));
     }
 
 
@@ -80,10 +80,10 @@ class GithubIntegrationControllerTest {
     void getUserDetails_error_usernameDoesntExist() throws Exception {
         // GIVEN
         String username = "username_DOES_NOT_EXIST";
-        
+
         when(githubIntegrationService.getUserDetails(username))
                 .thenThrow(new GithubException("User not found", "404", "Try different username"));
-        
+
         // WHEN & THEN
         mockMvc.perform(get("/api/integration/user-details")
                         .param("username", username))
