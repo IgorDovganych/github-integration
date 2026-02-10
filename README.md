@@ -88,3 +88,5 @@ How to use:
 4. Run the requests and provide the desired GitHub username as a parameter
 
 This allows you to easily validate the endpoint behavior and test different scenarios.
+<img width="757" height="517" alt="image" src="https://github.com/user-attachments/assets/18d60106-f181-495b-9219-c8a60531526f" />
+
