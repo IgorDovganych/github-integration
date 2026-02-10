@@ -17,6 +17,7 @@ of publicly available GitHub user data by supplying a GitHub username.
 The service integrates with the official GitHub REST API, aggregates the required information, 
 and returns a simplified and structured JSON response as shown in the example below:
 
+```
 {
     user_name: "octocat",
     display_name: "The Octocat",
@@ -31,6 +32,8 @@ and returns a simplified and structured JSON response as shown in the example be
             }, ...
     ]
 }
+```
+
 
 ## 2. Technologies
 
