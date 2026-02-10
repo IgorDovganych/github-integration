@@ -29,7 +29,7 @@ class GithubIntegrationControllerTest {
     @Test
     void getUserDetails_success() throws Exception {
 
-        // given
+        // GIVEN
         String username = "octocat";
 
         Repository repo = Repository.builder()
@@ -52,7 +52,7 @@ class GithubIntegrationControllerTest {
                 .thenReturn(userDetails);
 
 
-        // when / then
+        // WHEN & THEN
         mockMvc.perform(get("/api/integration/user-details")
                         .param("username", username))
                 .andExpect(status().isOk())
@@ -70,7 +70,7 @@ class GithubIntegrationControllerTest {
 
     @Test
     void getUserDetails_error_missingUsername() throws Exception {
-
+        // WHEN & THEN
         mockMvc.perform(get("/api/integration/user-details"))
                 .andExpect(status().isBadRequest());
     }
@@ -78,12 +78,13 @@ class GithubIntegrationControllerTest {
 
     @Test
     void getUserDetails_error_usernameDoesntExist() throws Exception {
-
+        // GIVEN
         String username = "username_DOES_NOT_EXIST";
-
+        
         when(githubIntegrationService.getUserDetails(username))
                 .thenThrow(new GithubException("User not found", "404", "Try different username"));
-
+        
+        // WHEN & THEN
         mockMvc.perform(get("/api/integration/user-details")
                         .param("username", username))
                 .andExpect(status().isBadRequest());

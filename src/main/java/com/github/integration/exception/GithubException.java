@@ -6,9 +6,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class GithubException extends RuntimeException{
+public class GithubException extends RuntimeException {
     private String message;
     private String errorCode;
     private String hint;
-    
 }

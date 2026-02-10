@@ -26,7 +26,8 @@ public class GithubIntegrationController {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Get user details from github")
+    @Operation(summary = "Get user details from Github",
+            description = "Returns aggregated user profile and repositories")
     @GetMapping(value = "/user-details")
     public ResponseEntity<UserDetailsResponse> getUserDetails(@RequestParam String username) {
         UserDetails userDetails = githubIntegrationService.getUserDetails(username);
