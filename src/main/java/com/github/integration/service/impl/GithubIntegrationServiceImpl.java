@@ -33,6 +33,7 @@ public class GithubIntegrationServiceImpl implements GithubIntegrationService {
                 .build();
     }
 
+    
     @Override
     public UserDetails getUserDetails(String username) {
         JsonNode userDetailsJson = getUserDetailsJson(username);

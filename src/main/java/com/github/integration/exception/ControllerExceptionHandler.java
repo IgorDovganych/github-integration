@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @ResponseBody
 @RestControllerAdvice
 public class ControllerExceptionHandler {
-    
+
     @ExceptionHandler(GithubException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     protected ErrorResponse handleEntityNotFoundException(GithubException e) {
-        
+
         log.error(e.getMessage());
         return ErrorResponse.builder()
                 .message(e.getMessage())

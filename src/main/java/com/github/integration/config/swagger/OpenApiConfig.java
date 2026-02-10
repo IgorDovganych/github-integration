@@ -15,12 +15,10 @@ public class OpenApiConfig {
 
     @Bean
     public OpenAPI openAPI() {
-
         return new OpenAPI()
                 .info(new Info()
                         .title("GitHub Integration API")
                         .version(appVersion)
-                        .description("Integration service for GitHub user data")
-                );
+                        .description("Integration service for GitHub user data"));
     }
 }

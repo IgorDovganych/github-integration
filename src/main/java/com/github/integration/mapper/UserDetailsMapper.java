@@ -4,7 +4,7 @@ import com.github.integration.model.UserDetails;
 import com.github.integration.response.UserDetailsResponse;
 
 public class UserDetailsMapper {
-    
+
     public static UserDetailsResponse toResponse(UserDetails userDetails) {
         if (userDetails != null) {
             return UserDetailsResponse.builder()
