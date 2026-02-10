@@ -33,7 +33,7 @@ public class GithubIntegrationServiceImpl implements GithubIntegrationService {
                 .build();
     }
 
-    
+
     @Override
     public UserDetails getUserDetails(String username) {
         JsonNode userDetailsJson = getUserDetailsJson(username);
@@ -59,13 +59,13 @@ public class GithubIntegrationServiceImpl implements GithubIntegrationService {
                 .build();
     }
 
-    private JsonNode getUserDetailsJson(String userName) {
+    private JsonNode getUserDetailsJson(String username) {
         return restClient.get()
-                .uri(USER_DETAILS_URL, userName)
+                .uri(USER_DETAILS_URL, username)
                 .retrieve()
                 .onStatus(status -> status.value() == 404,
                         (req, res) -> {
-                            throw new GithubException("GitHub user not found: " + userName, "404", "Try different userName");
+                            throw new GithubException(String.format("GitHub user not found: %s", username), "404", "Try different username");
                         })
                 .onStatus(status -> status.value() == 403,
                         (req, res) -> {
@@ -73,18 +73,18 @@ public class GithubIntegrationServiceImpl implements GithubIntegrationService {
                         })
                 .onStatus(HttpStatusCode::is5xxServerError,
                         (req, res) -> {
-                            throw new GithubException("GitHub server error", "500", "something went wrong on the github side");
+                            throw new GithubException("GitHub server error", "500", "Something went wrong on the github side");
                         })
                 .body(JsonNode.class);
     }
 
-    private JsonNode getReposJson(String userName) {
+    private JsonNode getReposJson(String username) {
         return restClient.get()
-                .uri(REPOS_URL, userName)
+                .uri(REPOS_URL, username)
                 .retrieve()
                 .onStatus(status -> status.value() == 404,
                         (req, res) -> {
-                            throw new GithubException("Repos not found for user: " + userName, "404", "try different userName");
+                            throw new GithubException(String.format("Repos not found for user: %s", username), "404", "Try different username");
                         })
                 .onStatus(status -> status.value() == 403,
                         (req, res) -> {
@@ -92,7 +92,7 @@ public class GithubIntegrationServiceImpl implements GithubIntegrationService {
                         })
                 .onStatus(HttpStatusCode::is5xxServerError,
                         (req, res) -> {
-                            throw new GithubException("GitHub server error", "500", "something went wrong on the github side");
+                            throw new GithubException("GitHub server error", "500", "Something went wrong on the github side");
                         })
                 .body(JsonNode.class);
     }
@@ -106,7 +106,7 @@ public class GithubIntegrationServiceImpl implements GithubIntegrationService {
             String reset = response.getHeaders().getFirst(HEADER_RESET);
             long secondsLeft = secondsLeftToReset(reset);
 
-            return new GithubException("GitHub rate limit exceeded.", "403", "Try again in " + secondsLeft + " seconds");
+            return new GithubException("GitHub rate limit exceeded.", "403", String.format("Try again in %s seconds", secondsLeft));
         }
 
         return new GithubException("GitHub access forbidden", "403", "Access denied");
